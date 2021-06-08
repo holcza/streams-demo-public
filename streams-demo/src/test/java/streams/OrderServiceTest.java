@@ -1,8 +1,10 @@
 package streams;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -34,6 +36,26 @@ class OrderServiceTest {
         ordersService.saveOrder(o1);
         ordersService.saveOrder(o2);
 
+    }
+
+    @Test
+    public void testCountOrderByStatus(){
+        long numberOfOrdersByStatus = ordersService.countOrderByStatus("pending");
+        assertEquals(1, numberOfOrdersByStatus);
+    }
+
+    @Test
+    public void testCollectOrdersWithProductCategory(){
+        List<Order> result = ordersService.collectOrdersWithProductCategory("Book");
+
+        assertEquals(1,result.size());
+    }
+
+    @Test
+    public void testProductsOverAmountPrice (){
+        List<Product> result = ordersService.productsOverAmountPrice(1900);
+
+        assertEquals(2,result.size());
     }
 
 
